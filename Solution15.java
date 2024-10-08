@@ -29,13 +29,18 @@ class Solution {
     public int compareVersion(String version1, String version2) {
         String[] v1 = version1.split("\\.");
         String[] v2 = version2.split("\\.");
-        for {int i == 0; i < v1.length || i < v2.length; ++i} (
+        int maxLength = Math.max(v1.length, v2.length);
+        for (int i = 0; i < maxLength; ++i) {
             int x = 0, y = 0;
-            if (i < v1.length()) {
+            if (i < v1.length) {
                 x = Integer.parseInt(v1[i]);
+            }else{
+                x=0;
             }
-            if (i < v2.length()) {
+            if (i < v2.length) {
                 y = Integer.parseInt(v2[i]);
+            }else{
+                y=0;
             }
             if (x > y) {
                 return 1;
@@ -43,7 +48,46 @@ class Solution {
             if (x < y) {
                 return -1;
             }
-        )
+    }
         return 0;
     }
+}
+
+public class L2022211995_15_Test {  
+  
+    public static void main(String[] args) {  
+        Solution solution = new Solution();  
+  
+        // 测试用例1：版本1大于版本2  
+        String version1 = "1.2.3.4";  
+        String version2 = "1.2.3";  
+        int result = solution.compareVersion(version1, version2);  
+        System.out.println("Test Case 1: " + (result == 1 ? "Passed" : "Failed")); // 预期结果为1  
+  
+        // 测试用例2：版本1小于版本2  
+        version1 = "1.0";  
+        version2 = "1.0.1";  
+        result = solution.compareVersion(version1, version2);  
+        System.out.println("Test Case 2: " + (result == -1 ? "Passed" : "Failed")); // 预期结果为-1  
+  
+        // 测试用例3：版本1等于版本2  
+        version1 = "1.2.3";  
+        version2 = "1.2.3";  
+        result = solution.compareVersion(version1, version2);  
+        System.out.println("Test Case 3: " + (result == 0 ? "Passed" : "Failed")); // 预期结果为0  
+  
+        // 测试用例4：版本1的段数少于版本2，但前面的段都相等且后面的段（版本1视为0）小于版本2  
+        version1 = "1.0";  
+        version2 = "1.0.0.1";  
+        result = solution.compareVersion(version1, version2);  
+        System.out.println("Test Case 4: " + (result == -1 ? "Passed" : "Failed")); // 预期结果为-1  
+  
+        // 测试用例5：版本1的段数多于版本2，但前面的段都相等且版本1多出的段大于0（版本2视为0的段）  
+        version1 = "1.2.3.4";  
+        version2 = "1.2.3";  
+        result = solution.compareVersion(version1, version2);  
+        System.out.println("Test Case 5: " + (result == 1 ? "Passed" : "Failed")); // 预期结果为1（与测试用例1重复，但为了完整性再次列出）  
+  
+        // 可以添加更多测试用例以覆盖更多情况  
+    }  
 }
